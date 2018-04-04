@@ -535,6 +535,10 @@ class (MonoTraversable map, SetContainer map) => IsMap map where
     unionsWith f (x:y:z) = unionsWith f (unionWith f x y:z)
 
     -- | Apply a function over every key-value pair of a map.
+    --
+    -- This function does not behave like one might expect from a map function, as
+    -- it can only map from source to target containers (maps) of the same type.
+    -- Due to the monomorphic nature of the typeclasses a more general approach is not possible.
     mapWithKey
         :: (ContainerKey map -> MapValue map -> MapValue map)
            -- ^ function that accepts the key and the previous value
